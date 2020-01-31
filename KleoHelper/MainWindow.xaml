@@ -1,0 +1,49 @@
+﻿<Window x:Class="KleoHelper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KleoHelper"
+        mc:Ignorable="d"
+        Title="Kleo Helper" Height="250" Width="600">
+    <Grid x:Name="WorkArea">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="buttonStack" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Stretch">
+                <Label />
+                <Button x:Name="Source_Button" Content="Source" Height="50" Click="Source_Button_Click" IsEnabled="{Binding IsGuiEnabled}"/>
+                <Label />
+                <Button x:Name="Output_Button" Height="50" Click="Output_Button_Click" HorizontalContentAlignment="Center" IsEnabled="{Binding IsGuiEnabled}">
+                    <TextBlock>Output<LineBreak/>(Optional)</TextBlock>
+                </Button>
+                <Label/>
+                <Button x:Name="Run_Button" Content="Decrypt!" Height="50" Click="Run_Button_Click" IsEnabled="{Binding IsGuiEnabled}"/>
+            </StackPanel>
+            <StatusBar Name="ProcessRunning" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
+                <ProgressBar x:Name="pb" Height="100" Width="5" IsIndeterminate="True">
+                    <ProgressBar.Triggers>
+                        <EventTrigger RoutedEvent="ProgressBar.Loaded"/>
+                    </ProgressBar.Triggers>
+                </ProgressBar>
+            </StatusBar>
+            <ScrollViewer Grid.Column="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <TextBox x:Name="TextOutput" Text="Welcome to KleoHelper!  Run the gpg CLI without touching the command line!" TextWrapping="Wrap" IsReadOnly="True"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
